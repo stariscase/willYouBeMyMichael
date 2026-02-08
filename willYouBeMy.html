@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Will you be my Valentine?</title>
+    <link rel="stylesheet" href="willYouBeMyStyle.css">
+</head>
+
+<body>
+    <div id="container">
+        <h1>Hi Michael!</h1>
+        <br>
+        <h2>Will you be my Valentine?</h2>
+
+        <button id="yesBtn">Yes</button>
+        <button id="noBtn">No</button>
+
+        <img id="catImg" src="defaultCat.png" alt="kitty">
+
+    </div>
+    
+    <script>
+        const yesBtn = document.getElementById('yesBtn');
+        const noBtn = document.getElementById('noBtn');
+        const catImg = document.getElementById('catImg');
+        const noTexts = [
+            "oh really?",
+            "are you sure about that?",
+            "are you sure?",
+            "aree yoou suuuuree?",
+            "areee yooouuu suuuuuureee??",
+            "like youre fr?",
+            "like sooo fr?",
+            "like fr fr?",
+            "wow...",
+            "just wooww..",
+            "this is awkward",
+            "i only have so many messages",
+            "MICHAEL SAY YES OMG",
+            "PLEASE SAY YES MICHAEL",
+        ];
+
+        let yesSize = 1;
+        let noTextIndex = 0;
+
+        yesBtn.addEventListener("click", function(){
+            document.body.innerHTML = `
+                <div style="text-align:center; padding 50px;">
+                    <div class="finalTxt">
+                        <h1>YAYY! i knew you'd say yes!</h1>
+                        <h2>i lovee you!! </h2>
+                        <img id="catImg" src="happyCat.png" alt="happy cat">
+                    </div>
+                    </div>
+                    `;
+        });
+
+        noBtn.addEventListener("click", function(){
+            const container = document.getElementById('container');
+            const rect = container.getBoundingClientRect();
+
+
+            const randomX = Math.random() * (rect.width - noBtn.offsetWidth);
+            const randomY = Math.random() * (rect.height - noBtn.offsetHeight);
+
+            noBtn.style.position = "absolute";
+            noBtn.style.left = randomX + "px";
+            noBtn.style.top = randomY + "px";
+            
+            noTextIndex++;
+            noBtn.textContent = noTexts[noTextIndex % noTexts.length];
+
+            yesSize += 0.67;
+            yesBtn.style.transform = `scale(${yesSize})`;
+
+            catImg.src = "sadCat.png";
+        });
+    </script>
+</body>
+</html>
